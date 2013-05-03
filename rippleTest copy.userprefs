@@ -1,0 +1,14 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Editor\CreatePlane.cs">
+    <Files>
+      <File FileName="Assets\Editor\Water (Pro Only)\Water4\WaterBaseEditor.cs" Line="8" Column="1" />
+      <File FileName="Assets\Editor\CreatePlane.cs" Line="22" Column="20" />
+      <File FileName="Assets\rippleSharp.cs" Line="115" Column="30" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
