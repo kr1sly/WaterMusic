@@ -124,6 +124,7 @@ void checkInput() {
 			{
 				Debug.Log ("high:"+(int)(column/28));
 				high_sounds[(int)(column/32)].Play ();
+				this.GetComponent<AudioSource>().pitch = (float)(row/127);
 			}
 				}
 				else
@@ -132,6 +133,7 @@ void checkInput() {
 			{
 				Debug.Log ("low:"+(int)(column/28));
 				low_sounds[(int)(column/32)].Play ();
+				this.GetComponent<AudioSource>().pitch = (float)(row/127);
 			}
 				}
     }
