@@ -14,10 +14,25 @@ public class Record : MonoBehaviour
 
 	//A handle to the attached AudioSource
 	private AudioSource goAudioSource;
-
+	public AudioSource darkCello;
+	public AudioSource clubDrums;
+	public AudioSource asia;
+	public AudioSource synth;
+	public AudioSource strings;
+	public AudioSource percussions;
+	public AudioSource reggaeDrums;
+	public ArrayList instruments = new ArrayList();
+	
 	//Use this for initialization
 	void Start() 
 	{
+		instruments.Add (darkCello);
+		instruments.Add (clubDrums);
+		instruments.Add (asia);
+		instruments.Add (synth);
+		instruments.Add (strings);
+		instruments.Add (percussions);
+		instruments.Add (reggaeDrums);
 		//Check if there is at least one microphone connected
 		if(Microphone.devices.Length <= 0)
 		{
@@ -46,6 +61,84 @@ public class Record : MonoBehaviour
 
 	void OnGUI() 
 	{
+		if(GUI.Button(new Rect(10, 120, 70, 50), "Cello"))
+		{
+				if(darkCello.volume == 0)
+				{
+					darkCello.volume = 1;
+				}
+				else darkCello.volume = 0;
+		}
+		if(GUI.Button(new Rect(10, 170, 70, 50), "Drums"))
+		{
+				if(clubDrums.volume == 0)
+				{
+					clubDrums.volume = 1;
+				}
+				else clubDrums.volume = 0;
+		}
+		if(GUI.Button(new Rect(10, 220, 70, 50), "Asia"))
+		{
+				if(asia.volume == 0)
+				{
+					asia.volume = 1;
+				}
+				else asia.volume = 0;
+		}
+		if(GUI.Button(new Rect(10, 270, 70, 50), "Perc"))
+		{
+				if(percussions.volume == 0)
+				{
+					percussions.volume = 1;
+				}
+				else percussions.volume = 0;
+		}
+		if(GUI.Button(new Rect(10, 320, 70, 50), "Synth"))
+		{
+				if(synth.volume == 0)
+				{
+					synth.volume = 1;
+				}
+				else synth.volume = 0;
+		}
+		if(GUI.Button(new Rect(10, 370, 70, 50), "Strings"))
+		{
+				if(strings.volume == 0)
+				{
+					strings.volume = 1;
+				}
+				else strings.volume = 0;
+		}
+		if(GUI.Button(new Rect(10, 420, 70, 50), "Reggae"))
+		{
+				if(reggaeDrums.volume == 0)
+				{
+					reggaeDrums.volume = 1;
+				}
+				else reggaeDrums.volume = 0;
+		}
+		if(GUI.Button(new Rect(Screen.width-80, 120, 70, 50), "Guitar"))
+		{
+				gameObject.GetComponent<rippleSharp>().mode = "guitar";
+		}
+		if(GUI.Button(new Rect(Screen.width-80, 170, 70, 50), "Keyboard"))
+		{
+				gameObject.GetComponent<rippleSharp>().mode = "keyboard";
+		}
+		if(GUI.Button(new Rect(Screen.width-80, 220, 70, 50), "Musicbox"))
+		{
+				gameObject.GetComponent<rippleSharp>().mode = "musicbox";
+		}
+		if(GUI.Button(new Rect(Screen.width-80, 270, 70, 50), "Glassharp"))
+		{
+				gameObject.GetComponent<rippleSharp>().mode = "glassharp";
+		}
+		if(GUI.Button(new Rect(Screen.width-80, 320, 70, 50), "Synthesizer"))
+		{
+				gameObject.GetComponent<rippleSharp>().mode = "synthesizer";
+		}
+		
+		
 		//If there is a microphone
 		if(micConnected)
 		{

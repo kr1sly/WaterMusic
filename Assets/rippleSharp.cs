@@ -9,6 +9,11 @@ private int[] vertexIndices;
 	
 public AudioSource[] high_sounds;
 public AudioSource[] low_sounds;
+public AudioSource[] keyboard;
+public AudioSource[] guitar;
+public AudioSource[] musicBox;
+	
+public string mode = "guitar";
 
 private Mesh mesh ;
 
@@ -118,7 +123,62 @@ void checkInput() {
     	float column = (xCoord/xStep);// + 0.5;
 		float row = (zCoord/zStep);// + 0.5;
 	    splashAtPoint((int)column,(int)row);
-		if((int)row >= rows/2)
+				
+		//if(Input.GetAxis("Mouse X") == 0 && Input.GetAxis ("Mouse Y") == 0)
+				//{
+			switch(mode)
+				{
+				case "keyboard":
+					if(!keyboard[(int)((column/36)*Mathf.Ceil(row/36))].isPlaying)
+					{
+						Debug.Log ("keyboard:"+(int)((column/36)*Mathf.Ceil(row/36)));
+						keyboard[(int)((column/36)*Mathf.Ceil(row/36))].Play ();
+					}
+					break;
+				case "guitar":	
+					if(!guitar[(int)((row/42))].isPlaying)
+						{
+							Debug.Log ("guitar:"+(int)((row/42)));
+							guitar[(int)((row/42))].Play();
+						}
+					break;
+				case "musicbox":
+					if(!musicBox[(int)((row/32))].isPlaying)
+					{
+						Debug.Log ("musicbox:"+(int)((row/32)));
+						musicBox[(int)((row/32))].Play();
+					}
+					break;
+				case "glassharp":
+					if((int)row >= rows/2)
+					{
+					if(!high_sounds[(int)(column/32)].isPlaying)
+					{
+						Debug.Log ("high:"+(int)(column/28));
+						high_sounds[(int)(column/32)].Play ();
+						this.GetComponent<AudioSource>().pitch = (float)(row/127);
+					}
+						}
+						else
+						{
+							if(!low_sounds[(int)(column/32)].isPlaying)
+					{
+						Debug.Log ("low:"+(int)(column/28));
+						low_sounds[(int)(column/32)].Play ();
+						this.GetComponent<AudioSource>().pitch = (float)(row/127);
+					}
+						}
+					break;
+				case "synthesizer":
+					foreach (AudioSource aud in gameObject.GetComponent<Record>().instruments)
+					{
+						((AudioSource)aud).pitch = (float)(row/127);
+					}
+					break;
+				}
+				//}
+				
+		/*if((int)row >= rows/2)
 			{
 			if(!high_sounds[(int)(column/32)].isPlaying)
 			{
@@ -135,7 +195,7 @@ void checkInput() {
 				low_sounds[(int)(column/32)].Play ();
 				this.GetComponent<AudioSource>().pitch = (float)(row/127);
 			}
-				}
+				}*/
     }
  }
 }
