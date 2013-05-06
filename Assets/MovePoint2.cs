@@ -11,6 +11,7 @@ public class MovePoint2 : MonoBehaviour
 	private Vector3 startingPosition;
 	public Color ownColor;
 	public Color waterColor;
+	private string storedMode;
 	
 	void Start()
 	{
@@ -34,8 +35,12 @@ public class MovePoint2 : MonoBehaviour
     { 
 		gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, gameObject.transform.localPosition.y, 1);
 		gameObject.guiTexture.color = new Color(0.5f,0.5f,0.5f,0.5f);
+
        screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
- 
+ 		storedMode = GameObject.Find ("128xplane").GetComponent<rippleSharp>().mode;
+		GameObject.Find ("128xplane").GetComponent<rippleSharp>().mode = "none";
+		//Vector3 test = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
+		//Debug.Log ("x: "+test.x+", y: "+test.y+", z: "+test.z);
        offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
  	   if(gameObject.GetComponents<SwimInPool>().Length != 0 && gameObject.GetComponent<SwimInPool>().active)
 		{
@@ -66,6 +71,7 @@ public class MovePoint2 : MonoBehaviour
 				{
 					gameObject.AddComponent("SwimInPool");
 				}
+				GameObject.Find ("128xplane").GetComponent<rippleSharp>().mode = storedMode;
 				gameObject.GetComponent<SwimInPool>().dropped = true;
 				gameObject.GetComponent<SwimInPool>().active = true;
 				
@@ -85,6 +91,7 @@ public class MovePoint2 : MonoBehaviour
 				{
 					gameObject.AddComponent("SwimInPool");
 				}
+				GameObject.Find ("128xplane").GetComponent<rippleSharp>().mode = storedMode;
 				gameObject.GetComponent<SwimInPool>().dropped = true;
 				gameObject.GetComponent<SwimInPool>().active = true;
 				

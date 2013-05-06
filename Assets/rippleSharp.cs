@@ -12,10 +12,8 @@ public AudioSource[] low_sounds;
 public AudioSource[] keyboard;
 public AudioSource[] guitar;
 public AudioSource[] musicBox;
-private int reds = 0;
-private int blues = 0;
+
 	private int counter = 0;
-	private int greens = 0;
 	
 public string mode = "none";
 
