@@ -1,14 +1,14 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\MovePoint2.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Standard Assets\Water (Basic)\Sources\Shaders\FX-Water Simple.shader">
     <Files>
-      <File FileName="SwimInPool.cs" Line="26" Column="2" />
       <File FileName="Assets\Standard Assets\Water (Basic)\Sources\Scripts\WaterSimple.cs" Line="1" Column="1" />
-      <File FileName="Assets\Standard Assets\Water (Basic)\Sources\Shaders\FX-Water Simple.shader" Line="1" Column="1" />
-      <File FileName="Assets\rippleSharp.cs" Line="16" Column="26" />
-      <File FileName="Assets\Record.cs" Line="120" Column="6" />
-      <File FileName="Assets\MovePoint2.cs" Line="94" Column="81" />
-      <File FileName="Assets\SwimInPool.cs" Line="13" Column="1" />
+      <File FileName="SwimInPool.cs" Line="26" Column="2" />
+      <File FileName="Assets\Standard Assets\Water (Basic)\Sources\Shaders\FX-Water Simple.shader" Line="21" Column="13" />
+      <File FileName="Assets\rippleSharp.cs" Line="1" Column="1" />
+      <File FileName="Assets\Record.cs" Line="1" Column="1" />
+      <File FileName="Assets\MovePoint2.cs" Line="1" Column="1" />
+      <File FileName="Assets\SwimInPool.cs" Line="1" Column="1" />
       <File FileName="Assets\HSBColor.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>

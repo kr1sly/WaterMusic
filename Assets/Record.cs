@@ -12,28 +12,14 @@ public class Record : MonoBehaviour
 
 	//A handle to the attached AudioSource
 	private AudioSource goAudioSource;
-	public AudioSource darkCello;
-	public AudioSource clubDrums;
-	public AudioSource asia;
-	public AudioSource synth;
-	public AudioSource strings;
-	public AudioSource percussions;
-	public AudioSource reggaeDrums;
+
 	private GUIStyle buttonRed;
 	private GUIStyle buttonGreen;
-	public ArrayList instruments = new ArrayList();
 	
 	//Use this for initialization
 	void Start() 
 	{
-		
-		instruments.Add (darkCello);
-		instruments.Add (clubDrums);
-		instruments.Add (asia);
-		instruments.Add (synth);
-		instruments.Add (strings);
-		instruments.Add (percussions);
-		instruments.Add (reggaeDrums);
+	
 		
 	}
 	
@@ -56,63 +42,6 @@ public class Record : MonoBehaviour
 			buttonGreen.fontSize = 15;
 			buttonGreen.alignment = TextAnchor.MiddleCenter;
 		}
-		/*if(GUI.Button(new Rect(10, 120, 70, 50), "Cello"))
-		{
-				if(darkCello.volume == 0)
-				{
-					darkCello.volume = 1;
-				}
-				else darkCello.volume = 0;
-		}
-		if(GUI.Button(new Rect(10, 170, 70, 50), "Drums"))
-		{
-				if(clubDrums.volume == 0)
-				{
-					clubDrums.volume = 1;
-				}
-				else clubDrums.volume = 0;
-		}
-		if(GUI.Button(new Rect(10, 220, 70, 50), "Asia"))
-		{
-				if(asia.volume == 0)
-				{
-					asia.volume = 1;
-				}
-				else asia.volume = 0;
-		}
-		if(GUI.Button(new Rect(10, 270, 70, 50), "Perc"))
-		{
-				if(percussions.volume == 0)
-				{
-					percussions.volume = 1;
-				}
-				else percussions.volume = 0;
-		}
-		if(GUI.Button(new Rect(10, 320, 70, 50), "Synth"))
-		{
-				if(synth.volume == 0)
-				{
-					synth.volume = 1;
-				}
-				else synth.volume = 0;
-		}
-		if(GUI.Button(new Rect(10, 370, 70, 50), "Strings"))
-		{
-				if(strings.volume == 0)
-				{
-					strings.volume = 1;
-				}
-				else strings.volume = 0;
-		}
-		if(GUI.Button(new Rect(10, 420, 70, 50), "Reggae"))
-		{
-				if(reggaeDrums.volume == 0)
-				{
-					reggaeDrums.volume = 1;
-				}
-				else reggaeDrums.volume = 0;
-		}
-		*/
 		if(gameObject.GetComponent<rippleSharp>().mode.Equals ("synthesizer"))
 		{
 			if(GUI.Button(new Rect(Screen.width-110, 120, 100, 50), "Synthesizer", buttonGreen))
