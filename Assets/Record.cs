@@ -24,8 +24,9 @@ public class Record : MonoBehaviour
 	public ArrayList instruments = new ArrayList();
 	
 	//Use this for initialization
-	void Start() 
+	IEnumerator Start() 
 	{
+		
 		instruments.Add (darkCello);
 		instruments.Add (clubDrums);
 		instruments.Add (asia);
@@ -33,6 +34,19 @@ public class Record : MonoBehaviour
 		instruments.Add (strings);
 		instruments.Add (percussions);
 		instruments.Add (reggaeDrums);
+		
+		yield return Application.RequestUserAuthorization(UserAuthorization.Microphone);
+        if (Application.HasUserAuthorization(UserAuthorization.Microphone))
+        {
+            InitMicrophone ();
+        }
+        else
+        {
+            // no permission. Show error here.
+        }
+	}
+	
+	void InitMicrophone() {
 		//Check if there is at least one microphone connected
 		if(Microphone.devices.Length <= 0)
 		{
@@ -58,10 +72,10 @@ public class Record : MonoBehaviour
 			goAudioSource = this.GetComponent<AudioSource>();
 		}
 	}
-
+	
 	void OnGUI() 
 	{
-		if(GUI.Button(new Rect(10, 120, 70, 50), "Cello"))
+		/*if(GUI.Button(new Rect(10, 120, 70, 50), "Cello"))
 		{
 				if(darkCello.volume == 0)
 				{
@@ -117,6 +131,7 @@ public class Record : MonoBehaviour
 				}
 				else reggaeDrums.volume = 0;
 		}
+		*/
 		if(GUI.Button(new Rect(Screen.width-80, 120, 70, 50), "Guitar"))
 		{
 				gameObject.GetComponent<rippleSharp>().mode = "guitar";
@@ -136,6 +151,21 @@ public class Record : MonoBehaviour
 		if(GUI.Button(new Rect(Screen.width-80, 320, 70, 50), "Synthesizer"))
 		{
 				gameObject.GetComponent<rippleSharp>().mode = "synthesizer";
+		}
+		if(GUI.Button(new Rect(Screen.width-80, 370, 70, 50), "Reset Synth"))
+		{
+				gameObject.GetComponent<rippleSharp>().resetSynth();
+		}
+		if(GUI.Button(new Rect(0, Screen.height-30, 60, 30), "Reset"))
+		{
+				gameObject.GetComponent<rippleSharp>().resetSynth();
+				gameObject.GetComponent<rippleSharp>().mode = "none";
+				GameObject guiInstruments = GameObject.Find("gui_instruments");
+				Component[] instrumentLayers = guiInstruments.GetComponentsInChildren<MovePoint2>();
+				foreach (MovePoint2 mP in instrumentLayers)
+				{
+					((MovePoint2)mP).ResetPosition();
+				}
 		}
 		
 		

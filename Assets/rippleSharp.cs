@@ -12,8 +12,12 @@ public AudioSource[] low_sounds;
 public AudioSource[] keyboard;
 public AudioSource[] guitar;
 public AudioSource[] musicBox;
+private int reds = 0;
+private int blues = 0;
+	private int counter = 0;
+	private int greens = 0;
 	
-public string mode = "guitar";
+public string mode = "none";
 
 private Mesh mesh ;
 
@@ -22,8 +26,10 @@ private Vector3[] vertices ;
 
 public float dampner = 0.999f;
 public float maxWaveHeight = 2.0f;
-
+private GameObject ppLane;
+private Vector4 wS;
 public int splashForce = 1000;
+private Stack colorStack = new Stack();
 
 //public int slowdown = 20;
 //private int slowdownCount = 0;
@@ -39,7 +45,8 @@ void Start () {
 	    vertices = mesh.vertices;
 		buffer1 = new int[vertices.Length];
 		buffer2 = new int[vertices.Length];
-
+		ppLane = GameObject.Find ("128xplane");
+		wS = ppLane.renderer.material.GetVector( "WaveSpeed" );
     Bounds bounds = mesh.bounds;
     
     float xStep = (bounds.max.x - bounds.min.x)/cols;
@@ -66,7 +73,57 @@ void Start () {
 	splashAtPoint(cols/2,rows/2);
 }
 
-
+	public Color AddColor(Color c)
+	{
+		Debug.Log ("Color: R: "+c.r+", G: "+c.g+", B: "+c.b);
+		HSBColor tmpColor = new HSBColor(c);
+		HSBColor waterColor = new HSBColor(gameObject.renderer.material.GetColor ("_horizonColor"));
+		colorStack.Push (waterColor);
+		counter++;
+		float ratio = (float)(1/(float)counter);
+		Debug.Log (ratio);
+		HSBColor newWaterColor = HSBColor.Lerp (waterColor, tmpColor, 0.5f);
+		
+		gameObject.renderer.material.SetColor ("_horizonColor", HSBColor.ToColor (newWaterColor));
+		
+		return HSBColor.ToColor (newWaterColor);
+		
+		
+		
+		//gameObject.renderer.material.SetColor (new Color((c.r+waterColor.r)*0.5,(c.r+waterColor.g)*0.5,(c.r+waterColor.b)*0.5),0);
+	}
+	
+	public Color RemoveColor(Color c)
+	{
+		HSBColor newOldColor = (HSBColor)colorStack.Pop ();
+		gameObject.renderer.material.SetColor ("_horizonColor", HSBColor.ToColor (newOldColor));
+		
+		return HSBColor.ToColor (newOldColor);
+		
+		
+		
+		//gameObject.renderer.material.SetColor (new Color((c.r+waterColor.r)*0.5,(c.r+waterColor.g)*0.5,(c.r+waterColor.b)*0.5),0);
+	}
+	
+	public void resetSynth()
+	{
+		GameObject guiInstruments = GameObject.Find("gui_instruments");
+		Component[] instrumentLayers = guiInstruments.GetComponentsInChildren<AudioSource>();
+		foreach (AudioSource aud in instrumentLayers)
+		{
+			((AudioSource)aud).pitch = 1;
+		}
+		Vector4 tmpWS = new Vector4(wS.x, wS.y, wS.z, wS.w);
+		ppLane.renderer.material.SetVector ("WaveSpeed", tmpWS);
+		
+		Component[] instrumentFloatings = guiInstruments.GetComponentsInChildren<SwimInPool>();
+		foreach (SwimInPool sip in instrumentFloatings)
+		{
+			((SwimInPool)sip).xFactor = 1;
+		}
+		mode = "synthesizer";
+	}
+	
 void splashAtPoint(int x, int y) {
 	int position = ((y * (cols + 1)) + x);
 	buffer1[position] = splashForce;
@@ -170,10 +227,25 @@ void checkInput() {
 						}
 					break;
 				case "synthesizer":
-					foreach (AudioSource aud in gameObject.GetComponent<Record>().instruments)
+					GameObject guiInstruments = GameObject.Find("gui_instruments");
+					Component[] instrumentLayers = guiInstruments.GetComponentsInChildren<AudioSource>();
+					foreach (AudioSource aud in instrumentLayers)
 					{
 						((AudioSource)aud).pitch = (float)(row/127);
 					}
+					Vector4 tmpWS = new Vector4(wS.x*(row/127), wS.y*(row/127), wS.z, wS.w);
+					ppLane.renderer.material.SetVector ("WaveSpeed", tmpWS);
+					
+					Component[] instrumentFloatings = guiInstruments.GetComponentsInChildren<SwimInPool>();
+					foreach (SwimInPool sip in instrumentFloatings)
+					{
+						((SwimInPool)sip).xFactor = (float)(row/127);
+					}
+					
+					/*foreach (AudioSource aud in gameObject.GetComponent<Record>().instruments)
+					{
+						((AudioSource)aud).pitch = (float)(row/127);
+					}*/
 					break;
 				}
 				//}
