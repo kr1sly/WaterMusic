@@ -75,13 +75,10 @@ void Start () {
 
 	public Color AddColor(Color c)
 	{
-		Debug.Log ("Color: R: "+c.r+", G: "+c.g+", B: "+c.b);
 		HSBColor tmpColor = new HSBColor(c);
 		HSBColor waterColor = new HSBColor(gameObject.renderer.material.GetColor ("_horizonColor"));
 		colorStack.Push (waterColor);
 		counter++;
-		float ratio = (float)(1/(float)counter);
-		Debug.Log (ratio);
 		HSBColor newWaterColor = HSBColor.Lerp (waterColor, tmpColor, 0.5f);
 		
 		gameObject.renderer.material.SetColor ("_horizonColor", HSBColor.ToColor (newWaterColor));
@@ -121,7 +118,7 @@ void Start () {
 		{
 			((SwimInPool)sip).xFactor = 1;
 		}
-		mode = "synthesizer";
+		//mode = "synthesizer";
 	}
 	
 void splashAtPoint(int x, int y) {
@@ -188,21 +185,18 @@ void checkInput() {
 				case "keyboard":
 					if(!keyboard[(int)((column/36)*Mathf.Ceil(row/36))].isPlaying)
 					{
-						Debug.Log ("keyboard:"+(int)((column/36)*Mathf.Ceil(row/36)));
 						keyboard[(int)((column/36)*Mathf.Ceil(row/36))].Play ();
 					}
 					break;
 				case "guitar":	
 					if(!guitar[(int)((row/42))].isPlaying)
 						{
-							Debug.Log ("guitar:"+(int)((row/42)));
 							guitar[(int)((row/42))].Play();
 						}
 					break;
 				case "musicbox":
 					if(!musicBox[(int)((row/32))].isPlaying)
 					{
-						Debug.Log ("musicbox:"+(int)((row/32)));
 						musicBox[(int)((row/32))].Play();
 					}
 					break;
@@ -211,7 +205,6 @@ void checkInput() {
 					{
 					if(!high_sounds[(int)(column/32)].isPlaying)
 					{
-						Debug.Log ("high:"+(int)(column/28));
 						high_sounds[(int)(column/32)].Play ();
 						this.GetComponent<AudioSource>().pitch = (float)(row/127);
 					}
@@ -220,7 +213,6 @@ void checkInput() {
 						{
 							if(!low_sounds[(int)(column/32)].isPlaying)
 					{
-						Debug.Log ("low:"+(int)(column/28));
 						low_sounds[(int)(column/32)].Play ();
 						this.GetComponent<AudioSource>().pitch = (float)(row/127);
 					}

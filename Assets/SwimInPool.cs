@@ -15,9 +15,6 @@ public class SwimInPool : MonoBehaviour
  	
 	void Update()
 	{
-		/*
-		 * 0.50 -> 0.90
-		-0.07 -> 0.62 */
 		if(active)
 		{
 			if (dropped) 
@@ -28,17 +25,34 @@ public class SwimInPool : MonoBehaviour
 			
 			currentPosition = gameObject.transform.localPosition;
 			
-			if (gameObject.transform.localPosition.x >= 0.43)
+			if (gameObject.name.Equals ("vocal") || gameObject.name.Equals ("rainy"))
 			{
-				//Debug.Log ("x "+gameObject.transform.position.x);
-				gameObject.transform.localPosition = new Vector3(currentPosition.x -= (xSpeed*xFactor), currentPosition.y, 0);
-				if (gameObject.transform.localPosition.y >= -4.05)
+				if (gameObject.transform.localPosition.x >= 0.33)
 				{
-				//Debug.Log ("y "+gameObject.transform.position.y);
-				gameObject.transform.localPosition = new Vector3(currentPosition.x, currentPosition.y -= (ySpeed*xFactor), 0);
+					//Debug.Log ("x "+gameObject.transform.position.x);
+					gameObject.transform.localPosition = new Vector3(currentPosition.x -= (xSpeed*xFactor), currentPosition.y, 0);
+					if (gameObject.transform.localPosition.y >= -4.05)
+					{
+					//Debug.Log ("y "+gameObject.transform.position.y);
+					gameObject.transform.localPosition = new Vector3(currentPosition.x, currentPosition.y -= (ySpeed*xFactor), 0);
+					}
 				}
+				else gameObject.transform.localPosition = new Vector3(0.95f, startingPosition.y, 0);
 			}
-			else gameObject.transform.localPosition = new Vector3(1.03f, startingPosition.y, 0);
+			else
+			{
+				if (gameObject.transform.localPosition.x >= 0.43)
+				{
+					//Debug.Log ("x "+gameObject.transform.position.x);
+					gameObject.transform.localPosition = new Vector3(currentPosition.x -= (xSpeed*xFactor), currentPosition.y, 0);
+					if (gameObject.transform.localPosition.y >= -4.05)
+					{
+					//Debug.Log ("y "+gameObject.transform.position.y);
+					gameObject.transform.localPosition = new Vector3(currentPosition.x, currentPosition.y -= (ySpeed*xFactor), 0);
+					}
+				}
+				else gameObject.transform.localPosition = new Vector3(1.03f, startingPosition.y, 0);
+			}
 		}
 		
 	}

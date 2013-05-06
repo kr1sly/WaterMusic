@@ -21,6 +21,8 @@ public class Record : MonoBehaviour
 	public AudioSource strings;
 	public AudioSource percussions;
 	public AudioSource reggaeDrums;
+	private GUIStyle buttonText;
+	private string onOff = "Off";
 	public ArrayList instruments = new ArrayList();
 	
 	//Use this for initialization
@@ -75,6 +77,14 @@ public class Record : MonoBehaviour
 	
 	void OnGUI() 
 	{
+		if(buttonText == null)
+		{
+			buttonText = new GUIStyle(GUI.skin.button);
+			buttonText.normal.textColor = Color.red;
+			buttonText.fontStyle = FontStyle.Bold;
+			buttonText.fontSize = 15;
+			buttonText.alignment = TextAnchor.MiddleCenter;
+		}
 		/*if(GUI.Button(new Rect(10, 120, 70, 50), "Cello"))
 		{
 				if(darkCello.volume == 0)
@@ -132,27 +142,38 @@ public class Record : MonoBehaviour
 				else reggaeDrums.volume = 0;
 		}
 		*/
-		if(GUI.Button(new Rect(Screen.width-80, 120, 70, 50), "Guitar"))
+		if(GUI.Button(new Rect(Screen.width-110, 120, 100, 50), "Guitar"))
 		{
 				gameObject.GetComponent<rippleSharp>().mode = "guitar";
 		}
-		if(GUI.Button(new Rect(Screen.width-80, 170, 70, 50), "Keyboard"))
+		if(GUI.Button(new Rect(Screen.width-110, 170, 100, 50), "Keyboard"))
 		{
 				gameObject.GetComponent<rippleSharp>().mode = "keyboard";
 		}
-		if(GUI.Button(new Rect(Screen.width-80, 220, 70, 50), "Musicbox"))
+		if(GUI.Button(new Rect(Screen.width-110, 220, 100, 50), "Musicbox"))
 		{
 				gameObject.GetComponent<rippleSharp>().mode = "musicbox";
 		}
-		if(GUI.Button(new Rect(Screen.width-80, 270, 70, 50), "Glassharp"))
+		if(GUI.Button(new Rect(Screen.width-110, 270, 100, 50), "Glassharp"))
 		{
 				gameObject.GetComponent<rippleSharp>().mode = "glassharp";
 		}
-		if(GUI.Button(new Rect(Screen.width-80, 320, 70, 50), "Synthesizer"))
+		if(GUI.Button(new Rect(Screen.width-110, 320, 100, 50), "Synthesizer", buttonText))
 		{
-				gameObject.GetComponent<rippleSharp>().mode = "synthesizer";
+			if(gameObject.GetComponent<rippleSharp>().mode.Equals ("synthesizer"))
+			{
+				gameObject.GetComponent<rippleSharp>().mode = "none";
+				buttonText.normal.textColor = Color.red;
+			}
+			else
+			{
+				gameObject.GetComponent<rippleSharp>().mode = "synthesizer";;
+				buttonText.normal.textColor = Color.green;
+			}
+				
 		}
-		if(GUI.Button(new Rect(Screen.width-80, 370, 70, 50), "Reset Synth"))
+		//GUI.Label (new Rect(Screen.width-100, 330, 20, 50), onOff);
+		if(GUI.Button(new Rect(Screen.width-110, 370, 100, 50), "Reset Synth"))
 		{
 				gameObject.GetComponent<rippleSharp>().resetSynth();
 		}

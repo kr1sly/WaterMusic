@@ -58,21 +58,43 @@ public class MovePoint2 : MonoBehaviour
  
     void OnMouseUp()
     {
-		if (gameObject.transform.localPosition.x >= 0.47 && gameObject.transform.localPosition.x <= 1.03 && gameObject.transform.localPosition.y <= -3.3 && gameObject.transform.localPosition.y >= -4.05)
+		if (gameObject.name.Equals ("vocal") || gameObject.name.Equals ("rainy"))
 		{
-			Debug.Log ("dropped");
-			if(gameObject.GetComponents<SwimInPool>().Length == 0)
+			if (gameObject.transform.localPosition.x >= 0.38 && gameObject.transform.localPosition.x <= 0.95 && gameObject.transform.localPosition.y <= -3.3 && gameObject.transform.localPosition.y >= -4.05)
 			{
-				gameObject.AddComponent("SwimInPool");
+				if(gameObject.GetComponents<SwimInPool>().Length == 0)
+				{
+					gameObject.AddComponent("SwimInPool");
+				}
+				gameObject.GetComponent<SwimInPool>().dropped = true;
+				gameObject.GetComponent<SwimInPool>().active = true;
+				
+				//gameObject.guiTexture.color = new Color(0.3f,0.8f,0.3f,0.5f);
+				audio.volume = 1.0f;
+				waterColor = GameObject.Find ("128xplane").GetComponent<rippleSharp>().AddColor (ownColor);
+				//gameObject.guiTexture.color = new Color(waterColor.r, waterColor.g, waterColor.b, 0.5f);
+				gameObject.guiTexture.color += ownColor;
+				//gameObject.guiTexture.color = new Color(ownColor.r, ownColor.g, ownColor.b, 0.5f);
 			}
-			gameObject.GetComponent<SwimInPool>().dropped = true;
-			gameObject.GetComponent<SwimInPool>().active = true;
-			
-			//gameObject.guiTexture.color = new Color(0.3f,0.8f,0.3f,0.5f);
-			audio.volume = 1.0f;
-			waterColor = GameObject.Find ("128xplane").GetComponent<rippleSharp>().AddColor (ownColor);
-			//gameObject.guiTexture.color = new Color(waterColor.r, waterColor.g, waterColor.b, 0.5f);
-			gameObject.guiTexture.color = new Color(ownColor.r, ownColor.g, ownColor.b, 0.5f);
+		}
+		else
+		{
+			if (gameObject.transform.localPosition.x >= 0.47 && gameObject.transform.localPosition.x <= 1.03 && gameObject.transform.localPosition.y <= -3.3 && gameObject.transform.localPosition.y >= -4.05)
+			{
+				if(gameObject.GetComponents<SwimInPool>().Length == 0)
+				{
+					gameObject.AddComponent("SwimInPool");
+				}
+				gameObject.GetComponent<SwimInPool>().dropped = true;
+				gameObject.GetComponent<SwimInPool>().active = true;
+				
+				//gameObject.guiTexture.color = new Color(0.3f,0.8f,0.3f,0.5f);
+				audio.volume = 1.0f;
+				waterColor = GameObject.Find ("128xplane").GetComponent<rippleSharp>().AddColor (ownColor);
+				//gameObject.guiTexture.color = new Color(waterColor.r, waterColor.g, waterColor.b, 0.5f);
+				gameObject.guiTexture.color += ownColor;
+				//gameObject.guiTexture.color = new Color(ownColor.r, ownColor.g, ownColor.b, 0.5f);
+			}
 		}
        Screen.showCursor = true;
     }
